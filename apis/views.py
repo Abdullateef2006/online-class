@@ -291,5 +291,26 @@ class Search_API(APIView):
         }, status=status.HTTP_200_OK)
 
 
+     
+     
+def function_name():
+    pass
+
+
+# from .serializers import UserProfileSerializer
+
+# class TutorView(APIView):
+
+#     def get(self, request, *args, **kwargs):
+#         # Get the user profile based on the logged-in user
+#         user_profile = get_object_or_404(UserProfile, user=request.user)
         
-    
+#         # Check if the user is an instructor
+#         if user_profile.status == "Instructor":
+#             # If status is "Instructor", return a redirect URL
+#             return Response({"message": "You are now an instructor.You can now add courses"}, status=status.HTTP_200_OK)
+#         else:
+#             # Otherwise, return the user profile data as JSON
+#             serializer = UserProfileSerializer(user_profile)
+#             return Response(serializer.data, status=status.HTTP_200_OK)
+
