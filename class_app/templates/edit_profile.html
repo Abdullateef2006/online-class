@@ -1,0 +1,29 @@
+{% extends 'Base.html' %}
+{% block title %} Profile{% endblock title %}
+{% block content %}
+<div class="row my-3 mb-5">
+    <div class="col-md-2">
+      
+    </div>
+    <div class="col-md-8 mb-5">
+        <div class="card">
+            <h5 class="card-header text-center">
+                {% if 'profile' in request.path %}
+                Profile Details
+                {% else %}
+                All Posts
+                {% endif %}
+            </h5>
+            <div class="card-body">
+                <form action="." method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    {{ formtwo.as_p }}
+
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

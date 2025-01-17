@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="assignment-creation">
+        <h1>Create a New Assignment</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Create Assignment</button>
+        </form>
+    </section>
+{% endblock %}

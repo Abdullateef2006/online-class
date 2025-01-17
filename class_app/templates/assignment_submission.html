@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    h1,h2,h3, h4, h5, h6, p {
+        color: white;
+    }
+</style>
+    <section class="assignment-submission">
+        <h1>Submit Assignments</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit Assignment</button>
+        </form>
+    </section>
+{% endblock %}

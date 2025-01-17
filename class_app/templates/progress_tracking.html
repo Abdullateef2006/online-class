@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Progress Tracking</title>
+</head>
+<body>
+    <h1>Progress Tracking</h1>
+    <p>Total Lessons Completed: {{ total_lessons_completed }}</p>
+    <p>Total Topics Completed: {{ total_topics_completed }}</p>
+    <p>Total Courses Completed: {{ total_courses_completed }}</p>
+    <p>Percentage Course Completion: {{ percentage_course_completion }}%</p>
+    
+    <!-- Add more progress tracking information as needed -->
+
+    <a href="{% url 'user_profile' %}">Back to Profile</a>
+</body>
+</html>

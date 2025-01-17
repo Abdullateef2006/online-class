@@ -1,0 +1,37 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">Login</h2>
+                </div>
+                <div class="card-body">
+
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-primary btn-block">Login</button>
+                        <p>Don't have an account? <a href="{% url 'register' %}"> Register here</a></p>
+                        <p>Forgotten your password? <a href="{% url 'password_reset' %}"> Click here</a></p>
+
+
+                    </form>
+
+                    <!-- Display any form validation errors here -->
+                    {% if payment_form.errors %}
+                        <div class="alert alert-danger mt-3">
+                            {{ form.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

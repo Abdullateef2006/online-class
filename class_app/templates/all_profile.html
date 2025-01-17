@@ -1,0 +1,14 @@
+
+{% block content %}
+
+{% for profile in profile %}
+<p><a href="{% url 'Instrctor_profile' profile.id %}">{{profile.user.username}}</a></p>
+<p>{{profile.profile_picture}}</p>
+
+
+
+    
+{% endfor %}
+    
+{% endblock content %}
+    

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1>Your Enrolled Courses</h1>
+        <p style="color: white;">{{course_count}} courses erolled </p>
+        
+        <ul class="list-group">
+            {% if enrolled_courses %}
+                {% for enrollment in enrolled_courses %}
+                    <li class="list-group-item">
+                        <a href="{% url 'course_detail' course_id=enrollment.course.id %}">
+                            {{ enrollment.course.title }}
+                        </a>
+                        <p>Enrolled on: {{ enrollment.enrollment_date|date:"F d, Y" }}</p>
+                        <a href="{% url 'delete_enrollment' enrollment.id enrollment.course_id%}" class="btn btn-primary">delete enrollment</a>
+
+                    </li>
+                    
+                {% endfor %}
+            {% else %}
+            <ul>
+                <li class="list-group-item">
+                    You haven't enrolled in any courses yet.
+                    <a href="{% url 'course_list' %}"> Enroll here</a>
+
+                </li>
+            </ul>
+               
+            {% endif %}
+
+        </ul>
+
+
+        
+    </div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="discussion-detail">
+        <h1>{{ discussion.title }}</h1>
+        <p>Category: {{ discussion.category }}</p>
+        <p>Posted by: {{ discussion.user.username }}</p>
+        <p>Created on: {{ discussion.created_at }}</p>
+        
+        <div class="discussion-content">
+            {{ discussion.content }}
+        </div>
+        
+        <h2>Comments</h2>
+        <ul>
+            {% for comment in discussion.comments.all %}
+                <li>
+                    <p>{{ comment.user.username }} said:</p>
+                    <div class="comment-content">
+                        {{ comment.content }}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+{% endblock %}

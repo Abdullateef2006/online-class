@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load custom_filters %}
+
+{% block content %}
+<style>
+  h1, h2, h3, h4, h5, h6, p, li {
+    color: white;
+  }
+</style>
+<div class="course-detail">
+  <h1 style="margin-top: 60px;">{{ course.title }}</h1>
+
+  <!-- Display what the user will learn -->
+  <h2>What You Will Learn</h2>
+  <ul>
+    {% for item in course.learn|split_by_newline %}
+    <li> <i class="fa-solid fa-check"></i> {{ item }}</li>
+    {% endfor %}
+  </ul>
+
+
+  <!-- Accordion for lessons and topics -->
+  <h2>Lessons</h2>
+  <div id="lessonsAccordion" style="width: 80%; margin-left:50px; margin-right:50px;">
+    {% for lesson in  course.lesson_set.all  %}
+    <div class="card">
+      <div class="card-header" id="lesson{{ lesson.id }}">
+        <h5 class="mb-0"  style="color: black;">
+          <button class="btn btn-light" data-toggle="collapse" data-target="#lessonCollapse{{ lesson.id }}"
+            aria-expanded="true" aria-controls="lessonCollapse{{ lesson.id }}" style="color: blue;">
+            {{ lesson.title }}
+          </button>
+        </h5>
+      </div>
+      <div id="lessonCollapse{{ lesson.id }}" class="collapse" aria-labelledby="lesson{{ lesson.id }}"
+        data-parent="#lessonsAccordion">
+        <div class="card-body">
+          <p  style="color: black;">{{ lesson.description }}</p>
+          <ul>
+            {% for topic in lesson.topic_set.all %}
+            <li  style="color: black;">{{ topic.title }}</li>
+            {% if topic.video_file %}
+            <!-- <video src="{{ topic.video_file.url }}" width="70%" controls></video> -->
+            <p><a href="{{ topic.video_file.url }}" target="_blank">Watch the video</a></p>
+            {% endif %}
+            {% if topic.pdf_file %}
+            <p><a href="{{ topic.pdf_file.url }}" target="_blank">Download PDF</a></p>
+            {% else %}
+            <li><a href="">No pdf available for this lesson</a></li>
+            {% endif %}
+            {% endfor %}
+          </ul>
+          <!-- You can add video and PDF content for the lesson here -->
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <p>No lessons available.</p>
+    {% endfor %}
+  </div>
+</div>
+
+
+
+  <h2>Assignments</h2>
+  <ul>
+    {% for assignment in course.assignment_set.all %}
+    <li>
+      <a href="{% url 'assignment_detail' course_id=course.id assignment_id=assignment.id %} " style="color: green;">
+        {{ assignment.title }}
+      </a>
+    </li>
+    {% empty %}
+    <p>No Assignment available.</p>
+
+    {% endfor %}
+  </ul>
+</div>
+
+
+{% endblock %}

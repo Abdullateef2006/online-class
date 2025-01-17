@@ -1,0 +1,16 @@
+<!-- messagingbot/templates/messages.html -->
+
+  
+  {% extends 'base.html' %}
+
+  {% block content %}
+  <ul class="list-group">
+    {% for message in messages %}
+      <li class="list-group-item">
+        <strong>{{ message.sender.username }}:</strong> {{ message.content }}
+      </li>
+    {% empty %}
+      <li class="list-group-item">No messages from this sender yet.</li>
+    {% endfor %}
+  </ul>
+  {% endblock %}

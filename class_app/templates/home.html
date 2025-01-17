@@ -1,0 +1,511 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<link rel="stylesheet" id="elementor-frontend-css"
+    href="https://websitedemos.net/online-coding-course-02/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.16.5"
+    media="all" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins&family=Signika+Negative:wght@500&display=swap"
+    rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@500&display=swap');
+    
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            list-style: none;
+            text-decoration: none;
+            line-height: 30px;
+            font-family: 'Signika Negative', sans-serif;
+        }
+    
+    
+        .body {
+            margin-top: 7rem;
+            margin-bottom: 7rem;
+        }
+    
+    
+        .course-container {
+            display: flex;
+            margin: 20px;
+            gap: 5rem;
+        }
+    
+        .course-image img {
+            width: 40rem;
+            height: 25rem;
+            border-radius: 20px;
+    
+        }
+    
+        .course-details {
+            padding: 20px;
+        }
+    
+        .icon-list {
+            display: flex;
+            align-items: center;
+        }
+    
+        .icon-list i {
+            margin-right: 5px;
+            color: yellow;
+        }
+    
+        h2 {
+            font-size: 1.5em;
+        }
+    
+        .course-description {
+            margin-top: 10px;
+            margin-top: 1rem;
+    
+        }
+    
+        .started {
+            margin-top: 1.5rem;
+            font-weight: 700;
+            color:black ;
+        }
+    
+    
+    
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 1.3rem;
+            display: flex;
+            gap: 1.3rem;
+    
+        }
+    
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+    
+        .feature-list i {
+            margin-right: 5px;
+            color: #007BFF;
+        }
+    
+        .start-course-button a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            margin-top: 1rem;
+        }
+    
+        .start-course-button a:hover {
+            background-color: #0056b3;
+        }
+    
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .course-container {
+                flex-direction: column;
+            }
+    
+            .course-image img {
+                border-bottom: 1px solid #ddd;
+            }
+    
+            .course-details {
+                padding: 15px;
+            }
+        }
+    #sub {
+        color: white;
+        line-height: 23px;
+    }
+
+    #body {
+        background-image:url("{% static '../static/images/svg.svg' %}");
+        background-repeat: no-repeat;
+
+
+
+    }
+
+    body {
+        background: none;
+    }
+
+    .header {
+        background-image:url("{% static '../static/images/svg.svg' %}");
+
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100%;
+
+        display: flex;
+        padding-top: 3%;
+        padding-bottom: 7%;
+        align-items: center;
+        width: 100%;
+
+
+    }
+
+    #shadow {
+        box-shadow: 0 64px 200px 0 rgba(0, 0, 0, 9.08);
+    }
+
+    .img {
+        padding-right: 50px;
+        padding-left: 50px;
+
+    }
+
+    .header_left {
+        width: 100%;
+        margin-bottom: 120px;
+    }
+
+
+
+
+    #img {
+        border-radius: 40px;
+        margin-top: 40px;
+        width: 80rem;
+        margin-right: 50px;
+
+    }
+
+
+    #title {
+        font-size: 3.5rem;
+        line-height: 1.3em;
+
+    }
+
+    .btn {
+        fill: black;
+        color: black;
+        background-color: white;
+        border-style: solid;
+        border-width: 0;
+        border-top-left-radius: 50px;
+        border-top-right-radius: 50px;
+        border-bottom-right-radius: 50px;
+        border-bottom-left-radius: 50px;
+        padding-right: 30px;
+        padding-left: 30px;
+        font-size: 0.83333333333333rem;
+        font-size: 17px;
+    }
+
+    .btn:hover {
+        background-color: yellow;
+
+
+    }
+
+    .des {
+        font-size: 20px;
+        line-height: 2.7rem;
+    }
+
+    .pill {
+        display: flex;
+        gap: 20px;
+    }
+
+
+
+    @import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@500&display=swap');
+
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        list-style: none;
+        text-decoration: none;
+        line-height: 30px;
+        font-family: 'Signika Negative', sans-serif;
+    }
+
+        .course1-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+
+        .course1 {
+            width: 300px;
+            margin: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+            background: transparent;
+            color: #333;
+            box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;        }
+
+        .course1:hover {
+            transform: scale(1.05);
+        }
+
+        .course1 img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom-left-radius: 20px;
+
+        }
+
+        .course1-details {
+            padding: 15px;
+        }
+
+        .course1-details span, .course1-details li {
+            color: #fff;
+        }
+
+        .course1 span {
+            margin: 0;
+        }
+
+        .course1 p {
+            margin: 10px 0;
+        }
+
+        .course1-icons {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 10px;
+        }
+
+        .course1-icons span {
+            display: flex;
+            align-items: center;
+        }
+
+        .course1-icons i {
+            margin-right: 5px;
+            color: yellow ;
+        }
+
+        @media (max-width: 1024px) {
+            .header {
+                display: block;
+            }
+    
+         
+    
+    
+            .pill {
+                gap: 70px;
+                display: block;
+                align-items: center;
+            }
+
+            .course1-details span, .course1-details li {
+                color: #333;
+            }
+    
+    
+            #body {
+                background: none;
+    
+    
+            }
+    
+            #sub {
+                color: black;
+            }
+    
+            #shadow {
+                box-shadow: 0 64px 200px 0 rgba(0, 0, 0, 0.1);
+            }
+    
+    
+        }
+</style>
+
+
+
+<!-- <div class="bg-white" id="slide">
+
+    <div class="relative isolate px-6 pt-14 lg:px-8">
+        <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+            aria-hidden="true">
+            <div class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+                style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
+            </div>
+        </div>
+        <div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+            <div class="hidden sm:mb-8 sm:flex sm:justify-center">
+                <div
+                    class="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
+                    Announcing your next round of learning. <a href="#" class="font-semibold text-indigo-600"><span
+                            class="absolute inset-0" aria-hidden="true"></span>Read more <span
+                            aria-hidden="true">&rarr;</span></a>
+                </div>
+            </div>
+            <div class="text-center">
+                <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Welcome to Abdullateef coding
+                    platform</h1>
+                <p class="mt-6 text-lg leading-8 text-gray-600">Abdullateef coding platform is a perfect e-learning
+                    platform for
+                    non-techies and great for tech lovers who are willing to
+                    learn about tech for a short amount of time with minimal resources and affordable price.</p>
+                <div class="mt-10 flex items-center justify-center gap-x-6">
+                    <a href="#"
+                        class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Get
+                        started</a>
+                    <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Learn more <span
+                            aria-hidden="true">→</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
+            aria-hidden="true">
+            <div class="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+                style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
+            </div>
+        </div>
+    </div>
+</div> -->
+<div class="header">
+    <div class="header_left">
+        <div class="dem">
+            <p style="color:white;"> <i style="color: rgb(245, 245, 25);" class="fas fa-circle"></i> ON-DEMAND COURSE
+            </p>
+        </div>
+        <div class="other">
+            <div class="title">
+                <h2 id="title" style="color:white;"> Abdullateef coding
+                    platform </h2>
+            </div>
+            <div class="des">
+                <p style="color: white; "> Empower Your Future with Code: Join Our Online Coding Class for a Journey of Learning, Growth, and Mastery. Dive into the world of programming, embrace the power of code, and shape your digital destiny. Our online coding class is your path to acquiring the skills and knowledge needed to thrive in the digital age. Don't just dream of a brighter future – code it into existence with us.</p>
+            </div>
+            <div class="pill" style="align-items: center; margin-top:20px;  margin-left:20px;">
+                <button class="btn"><a href="{% url 'login' %}">Login</a></button>
+                <button class="btn"><a href="{% url 'register' %}">Register</a></button>
+                <div class="view_all">
+                    <p style="color: white;">
+                        <a href="{% url 'course_list' %}">View All Courses <i
+                                class="fas fa-long-arrow-alt-right"></i></a>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header_right">
+        <div class="img">
+            <img id="img" src="{% static '../static/images/img.jpg' %}" alt="">
+        </div>
+    </div>
+</div>
+
+
+
+<div class="body">
+    <div class="course-container">
+        <div class="course-image">
+            <img  class="Course_Image" src="https://websitedemos.net/online-coding-course-02/wp-content/uploads/sites/713/2020/10/online-programming-course-featured-video.jpg"
+                alt="Course Image">
+        </div>
+
+        <div class="course-details">
+            <div class="icon-list">
+                <i class="fas fa-circle"></i>
+                <span>Featured Course</span>
+            </div>
+
+            <span class="started">Getting Started With Python 3 for Beginner</span>
+
+            <div class="course-description">
+                <li>Nibh enim nisi amet et nunc varius facilisis nulla non urna pulvinar felis, faucibus id placerat.
+                </li>
+            </div>
+
+            <ul class="feature-list">
+                <div>
+                    <li><i class="fas fa-check-circle"></i> Fundamental</li>
+                    <li><i class="fas fa-check-circle"></i> Input and output</li>
+                </div>
+                <div>
+                    <li><i class="fas fa-check-circle"></i> Conditional branching</li>
+                    <li><i class="fas fa-check-circle"></i> 8+ more lessons</li>
+                </div>
+
+            </ul>
+
+            <div class="start-course-button">
+                <a href="#">Start Course</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="course1-container" id="body">
+    <div class="course1">
+        <div class="course1-image">
+            <img src="https://websitedemos.net/online-coding-course-02/wp-content/uploads/sites/713/2020/10/online-programming-course-03.jpg" alt="Course1 Image">
+        </div>
+        <div class="course1-details">
+            <span class="started">Front End</span>
+            <li>HTML 5 Web Component Fundamentals</li>
+            <div class="course1-icons">
+                <span><i class="fas fa-user"></i> Beginner</span>
+                <span><i class="fas fa-hourglass-half"></i> 2h 24m</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="course1">
+        <div class="course1-image">
+            <img src="https://websitedemos.net/online-coding-course-02/wp-content/uploads/sites/713/2020/10/online-programming-course-02.jpg" alt="Course1 Image">
+        </div>
+        <div class="course1-details">
+            <span class="started">Front End</span>
+            <li>Mastering CSS 3 Flexbox With Real World Projects</li>
+            <div class="course1-icons">
+                <span><i class="fas fa-user"></i> Beginner</span>
+                <span><i class="fas fa-hourglass-half"></i> 3h 18m</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="course1">
+        <div class="course1-image">
+            <img src="https://websitedemos.net/online-coding-course-02/wp-content/uploads/sites/713/2020/10/online-programming-course-01.jpg" alt="Course1 Image">
+        </div>
+        <div class="course1-details">
+            <span class="started">Front End</span>
+            <li>Full Stack Web Development with React Hooks and Redux</li>
+            <div class="course1-icons">
+                <span><i class="fas fa-user"></i> Intermediate</span>
+                <span ><i class="fas fa-hourglass-half"></i> 4h 36m</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add more course1s as needed -->
+
+</div>
+
+    {% endblock %}

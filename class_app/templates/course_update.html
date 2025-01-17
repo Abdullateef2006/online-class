@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="course-update">
+        <h1>Update Course Details</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Update Course</button>
+        </form>
+    </section>
+{% endblock %}

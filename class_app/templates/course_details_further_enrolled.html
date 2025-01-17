@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% load custom_filters %}
+
+{% block content %}
+<style>
+    h1, h2, h3, h4, h5, h6, p, li {
+      color: white;
+    }
+  </style>
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>{{ course.title }}</h1>
+            <p><strong> Category:</strong> {{ course.category.name }}</p>
+            <p> <strong>Author:</strong> <a href="">{{course.instructor}}   </a> </p>
+            <p> <strong>Language:</strong> {{ course.language }}</p>
+
+
+            <hr class="my-4">
+
+            <!-- Course Description -->
+            <h2>Description</h2>
+            <p>{{ course.description }}</p>
+
+            <hr class="my-4">
+
+            <h2>What You Will Learn</h2>
+            <ul>
+                {% for item in course.learn|split_by_newline %}
+                <li> <i class="fa-solid fa-check"></i> {{ item }}</li>
+                {% endfor %}
+            </ul>
+
+            <hr class="my-4">
+            <h2>requirements</h2>
+            <ul>
+                {% for item in course.requirements|split_by_newline %}
+                <li> <i class="fa-solid fa-check"></i>{{ item }}</li>
+                {% endfor %}
+            </ul>
+
+            <hr class="my-4">
+
+
+
+            <!-- Course Lessons -->
+            <h2>Lessons</h2>
+            <div id="lessonsAccordion">
+                {% for lesson in course.lesson_set.all %}
+                <div class="card">
+                    <div class="card-header" id="lesson{{ lesson.id }}">
+                        <h5 class="mb-0">
+                            <button class="btn btn-light" data-toggle="collapse"
+                                data-target="#lessonCollapse{{ lesson.id }}" aria-expanded="true"
+                                aria-controls="lessonCollapse{{ lesson.id }}" style="color: blue;">
+                                {{ lesson.title }}
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="lessonCollapse{{ lesson.id }}" class="collapse" aria-labelledby="lesson{{ lesson.id }}"
+                        data-parent="#lessonsAccordion">
+                        <div class="card-body">
+                            <p  style="color: black;">{{ lesson.description }}</p>
+                            <ul>
+                                {% for topic in lesson.topic_set.all %}
+                                <li style="color: black;">{{ topic.title }}</li>
+                                {% empty %}
+                                <li  style="color: black;">No topics available yet</li>
+                                {% endfor %}
+                            </ul>
+                            <!-- You can add video and PDF content for the lesson here -->
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <p>No lessons available.</p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-4" style="margin-top:40px;">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title"  style="color: black;">{{course.title}}</h2>
+                    <p class="card-text"  style="color: black; font-size:23px;"><strong>Price:</strong> &#8358 {{ course.price }}</p>
+                    {% if user.is_authenticated %}
+
+                    {% if enrollment.is_enrolled   %}
+                    <a href="{% url 'course_enrollment' course.id %}">Enroll here</a>
+
+                    {% else %}
+                    <form method="post" id="payment-form">
+                        {% csrf_token %}
+                        <a href="#">course already enrolled </a>
+                        <a href="{%  url 'enroll_courses' %}" class="btn btn-primary">Go to enrolled courses</a>
+                        <!-- <button type="button" onclick="payWithPaystack()" class="btn btn-primary">Pay Now</button> -->
+
+                    </form>
+
+                    {% endif %}
+                    {% else %}
+                    <p><a href="{% url 'login' %}">Log in</a> to enroll in this course.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://js.paystack.co/v1/inline.js"></script>
+
+<script>
+    function payWithPaystack() {
+        var handler = PaystackPop.setup({
+            key: '{{key}}',  // Add your Paystack public key here
+            email: "{{ course.instructor.email }}",
+            amount: Number("{{course.price}}") ,  // Convert to kobo
+            ref: "{{ reference }}",
+            callback: function (response) {
+                window.location.href = "{% url 'course_enrollment' course.uu_id %}";
+            },
+            onClose: function () {
+                alert('Payment canceled');
+            }
+        });
+        handler.openIframe();
+    }
+
+</script>
+{% endblock %}

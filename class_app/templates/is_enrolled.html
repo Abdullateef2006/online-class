@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+
+
+{% block content %}
+<style>
+    h1, h2, h3, h4, h5, h6, p, li {
+      color: white;
+    }
+  </style>
+  
+  <!-- The Modal -->
+  <!-- <div class="modal fade" id="myModal" style="margin-top: 70px;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Welcome to Abdullateef Coding!</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p> welcome {{user.first_name}} Enjoy our free lessons even before enrollment</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="cancelButton" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  
+  <!-- <div class="course-detail">
+    <h1>{{ course.title }}</h1>
+    <ul>
+      <li>Course:<a href="{% url 'course_details' course.id %}"> {{ course.title }}</a> </li>
+  
+      <li>{{ course.description }}</li>
+      <li>created by: <a href="">{{course.instructor}}</a></li>
+      <li>Language : {{course.language}}</li>
+    </ul>
+  
+    <h2>What You Will Learn</h2>
+    <ul>
+      {% for item in course.description|split_by_newline %}
+      <li> <i class="fa-solid fa-check"></i> {{ item }}</li>
+      {% endfor %}
+    </ul>
+  
+  
+    <h2>requirements</h2>
+    <ul>
+      {% for item in course.requirements|split_by_newline %}
+      <li> <i class="fa-solid fa-check"></i>{{ item }}</li>
+      {% endfor %}
+    </ul>
+  
+    <h2> Lessons</h2>
+    <div id="accordion" style="padding-left: 40px; padding-right:30px;">
+      {% for lesson in free_lessons %}
+      <div class="card">
+        <div class="card-header" id="lesson{{ lesson.id }}Heading">
+          <h5 class="mb-0">
+            <a data-toggle="collapse" data-target="#lesson{{ lesson.id }}Collapse" aria-expanded="true"
+              aria-controls="lesson{{ lesson.id }}Collapse"
+              style="font-size: medium; color:#0c63e4; font-weight:400; margin-right:10px; ">
+              {{ lesson.title }}
+            </a>
+          </h5>
+        </div>
+  
+        <div id="lesson{{ lesson.id }}Collapse" class="collapse" aria-labelledby="lesson{{ lesson.id }}Heading"
+          data-parent="#accordion">
+          <div class="card-body">
+            <ul>
+              {% for topic in lesson.topic_set.all %}
+              <li>{{ topic.title }}</li>
+              {% if topic.video_file %}
+              <video src="{{ topic.video_file.url }}" width="70%" controls></video>
+              <p><a href="{{ topic.video_file.url }}" target="_blank">Watch the video</a></p>
+              {% endif %}
+              {% if topic.pdf_file %}
+              <p><a href="{{ topic.pdf_file.url }}" target="_blank">Download PDF</a></p>
+              {% else %}
+              <li><a href="">No pdf available for this lesson</a></li>
+              {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <p>Do you want to go further in learning {{course.title}} <a href="{% url 'course_details_further' course.id %}">click here</a></p>
+  
+  
+   
+  
+  
+  
+  </div> -->
+  
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <h1>{{ course.title }}</h1>
+        <h3><strong>Category: </strong>{{ course.category.name }}</h3>
+  
+        <hr class="my-4">
+  
+        <!-- Course Description -->
+        <h2>Description</h2>
+        <p>{{ course.description }}</p>
+  
+        <hr class="my-4">
+  
+        <!-- Course Lessons -->
+        <h2>Lessons</h2>
+        <div id="lessonsAccordion">
+          {% for lesson in free_lessons %}
+          <div class="card">
+            <div class="card-header" id="lesson{{ lesson.id }}">
+              <h5 class="mb-0"  style="color: black;">
+                <button class="btn btn-light" data-toggle="collapse" data-target="#lessonCollapse{{ lesson.id }}"
+                  aria-expanded="true" aria-controls="lessonCollapse{{ lesson.id }}" style="color: blue;">
+                  {{ lesson.title }}
+                </button>
+              </h5>
+            </div>
+            <div id="lessonCollapse{{ lesson.id }}" class="collapse" aria-labelledby="lesson{{ lesson.id }}"
+              data-parent="#lessonsAccordion">
+              <div class="card-body">
+                <p  style="color: black;">{{ lesson.description }}</p>
+                <ul>
+                  {% for topic in lesson.topic_set.all %}
+                  <li  style="color: black;">{{ topic.title }}</li>
+                  {% if topic.video_file %}
+                  <video src="{{ topic.video_file.url }}" width="70%" controls></video>
+                  <p><a href="{{ topic.video_file.url }}" target="_blank">Watch the video</a></p>
+                  {% endif %}
+                  {% if topic.pdf_file %}
+                  <p><a href="{{ topic.pdf_file.url }}" target="_blank">Download PDF</a></p>
+                  {% else %}
+                  <li><a href="">No pdf available for this lesson</a></li>
+                  {% endif %}
+                  {% endfor %}
+                </ul>
+                <!-- You can add video and PDF content for the lesson here -->
+              </div>
+            </div>
+          </div>
+          {% empty %}
+          <p>No lessons available.</p>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="col-md-4" style="margin-top: 100px;">
+        <div class="card">
+          <div class="card-body">
+                  <p  style="color: black;">You have already enrolled to {{course.title}}. </p>
+                  <p><a  class="btn btn-primary" href="{% url 'enroll_courses' %}"> view Enrolled courses</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}

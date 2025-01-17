@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="course-creation">
+        <h1>edit New Course</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">edit Course</button>
+        </form>
+    </section>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="video-detail">
+        <h1>Video Detail</h1>
+        <h2>Title: {{ video.title }}</h2>
+        <p>Description: {{ video.description }}</p>
+        <video controls>
+            <source src="{{ video.video_url }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </section>
+{% endblock %}

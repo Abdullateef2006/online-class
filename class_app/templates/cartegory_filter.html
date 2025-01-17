@@ -1,0 +1,201 @@
+<!-- category_filter.html -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    .wrapper {
+        position: relative;
+        overflow-x: hidden;
+        background: none;
+        padding-left: 18%;
+        padding-right: 18%;
+    }
+
+    .wrapper .icon {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: 120px;
+        display: flex;
+        align-items: center;
+    }
+
+    .icon:first-child {
+        left: 0;
+        display: none;
+    }
+
+    .icon:last-child {
+        right: 0;
+        justify-content: flex-end;
+    }
+
+    .icon i {
+        width: 55px;
+        height: 55px;
+        cursor: pointer;
+        font-size: 1.2rem;
+        text-align: center;
+        line-height: 55px;
+        border-radius: 50%;
+        background: #efedfb;
+
+    }
+
+    .icon i:hover {
+        background: #efedfb;
+    }
+
+    .icon:first-child i {
+        margin-left: 15px;
+    }
+
+    .icon:last-child i {
+        margin-right: 15px;
+    }
+
+    .wrapper .tabs-box {
+        display: flex;
+        gap: 12px;
+        list-style: none;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+    }
+
+    .tabs-box.dragging {
+        scroll-behavior: auto;
+        cursor: grab;
+    }
+
+    .tabs-box .tab {
+        cursor: pointer;
+        font-size: 1.18rem;
+        white-space: nowrap;
+        background: #f5f4fd;
+        padding: 13px 20px;
+        border-radius: 30px;
+        border: 1px solid #d8d5f2;
+    }
+
+    .tabs-box .tab:hover {
+        background: #efedfb;
+    }
+
+    .tabs-box.dragging .tab {
+        user-select: none;
+        pointer-events: none;
+    }
+
+    .tabs-box .tab.active {
+        color: #fff;
+        background: #5372F0;
+        border-color: transparent;
+    }
+
+    #cartegory_list {
+        display: flex;
+        gap: 8px;
+        margin-left: 12%;
+    }
+
+    hr {
+        width: 80%;
+        margin-left: 10%;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        color: white;
+
+    }
+
+
+    #tab {
+
+        padding-top: 0;
+        padding-bottom: 0;
+        cursor: pointer;
+        white-space: nowrap;
+        padding: 13px 20px;
+    }
+</style>
+
+<body>
+    <hr>
+
+    <div class="wrapper">
+
+        <div class="icon"><i id="left" class="fa-solid fa-angle-left"></i></div>
+
+        <ul class="tabs-box">
+            <li class="btn btn-light" id="tab"><a  href="{% url 'course_list' %}" id="tab">All Categories</a></li>
+
+            {% for category in categories %}
+
+            <li class="btn btn-light " id="tab"><a href="{% url 'course_list_category' category.id %}">{{ category.name }}</a>
+            </li>
+
+            {% endfor %}
+
+        </ul>
+        <div class="icon"><i id="right" class="fa-solid fa-angle-right"></i></div>
+    </div>
+    <hr>
+
+    <script>
+        const tabsBox = document.querySelector(".tabs-box"),
+            allTabs = tabsBox.querySelectorAll(".tab"),
+            arrowIcons = document.querySelectorAll(".icon i");
+
+        let isDragging = false;
+
+        const handleIcons = (scrollVal) => {
+            let maxScrollableWidth = tabsBox.scrollWidth - tabsBox.clientWidth;
+            arrowIcons[0].parentElement.style.display = scrollVal <= 0 ? "none" : "flex";
+            arrowIcons[1].parentElement.style.display = maxScrollableWidth - scrollVal <= 1 ? "none" : "flex";
+        }
+
+        arrowIcons.forEach(icon => {
+            icon.addEventListener("click", () => {
+                // if clicked icon is left, reduce 350 from tabsBox scrollLeft else add
+                let scrollWidth = tabsBox.scrollLeft += icon.id === "left" ? -340 : 340;
+                handleIcons(scrollWidth);
+            });
+        });
+
+        allTabs.forEach(tab => {
+            tab.addEventListener("click", () => {
+                tabsBox.querySelector(".active").classList.remove("active");
+                tab.classList.add("active");
+            });
+        });
+
+        const dragging = (e) => {
+            if (!isDragging) return;
+            tabsBox.classList.add("dragging");
+            tabsBox.scrollLeft -= e.movementX;
+            handleIcons(tabsBox.scrollLeft)
+        }
+
+        const dragStop = () => {
+            isDragging = false;
+            tabsBox.classList.remove("dragging");
+        }
+
+        tabsBox.addEventListener("mousedown", () => isDragging = true);
+        tabsBox.addEventListener("mousemove", dragging);
+        document.addEventListener("mouseup", dragStop);
+    </script>
+
+
+
+</body>
+
+</html>

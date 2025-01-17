@@ -1,0 +1,82 @@
+<!-- messagingbot/templates/chat.html -->
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 style="color: white;">Group Chat</h2>
+
+  <!-- Users list for admin to select a recipient -->
+  <div class="row">
+    <div class="col-md-3">
+      <div class="list-group">
+        {% for user in available_users %}
+          <a href="{% url 'user_chat' user.id %}" class="list-group-item list-group-item-action">
+            {{ user.username }}
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Chat display and message input -->
+    <div class="col-md-9">
+      <div class="card">
+        <div class="card-header">
+          Chat with <span id="selectedUsername">Admin</span>
+        </div>
+        <div class="card-body">
+          <div class="messages">
+          
+            {% for message in messages_sent_to_admin %}
+              <p><strong>{{ message.sender.username }}:</strong> {{ message.content }}</p>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="card-footer">
+          <form id="messageForm" method="post">
+            {% csrf_token %}
+            <div class="input-group">
+              <input type="text" id="messageInput" name="content" class="form-control" placeholder="Type your message..." required>
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-primary">Send</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function () {
+    // Handle user selection by admin
+    $(".list-group-item").click(function () {
+      var selectedUserId = $(this).data('user-id');
+      var selectedUsername = $(this).text();
+      $("#selectedUser").val(selectedUserId);
+      $("#selectedUsername").text(selectedUsername);
+    });
+
+    // AJAX to send a message
+    $("#messageForm").on("submit", function (e) {
+      e.preventDefault();
+      var formData = $(this).serialize();
+      $.ajax({
+        url: "{% url 'chat_view' %}",  // Use the correct URL tag
+        method: "POST",
+        data: formData,
+        success: function (data) {
+          // Clear the message input
+          $("#messageInput").val("");
+          // Append the sent message to the chat
+          $(".messages").append('<p><strong>You:</strong> ' + data.content + '</p>');
+        },
+        error: function () {
+          alert('Error sending message.');
+        }
+      });
+    });
+  });
+</script>
+{% endblock %}

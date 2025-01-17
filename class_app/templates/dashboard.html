@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block content %}
+<style>
+    
+  html {
+    scroll-behavior: auto !important;
+  }
+  i {
+    margin-left: 30px;
+  }
+  .cart {
+    display: grid;
+
+    gap: 40px 40px;
+    grid-auto-flow: row;
+
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    padding-bottom: 30px;
+    padding-left: 30px;
+    padding-right: 40px;
+    padding-top: 30px;
+    width: 100%;
+
+
+
+  }
+
+
+
+
+</style>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+
+<div class="sidebar">
+    <ul class="navLink">
+        <li>
+            <a href="#">
+                <i class='bx bx-box'></i>
+                <span class="links_name">Available courses</span>
+            </a>
+        </li>
+        <li>
+            <a href="#enrolled_course">
+                <i class='bx bx-list-ul'></i>
+                <span class="links_name">Enrolled courses</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="#user_profile">
+                <i class='bx bx-user'></i>
+                <span class="links_name">Your profile</span>
+            </a>
+        </li>
+
+        <li class="log_out">
+            <a href="{% url 'logout' %}">
+                <i class='bx bx-log-out'></i>
+                <span class="links_name">Log out</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<section class="home-section">
+    <nav>
+        <div class="sidebar-button">
+            <i class='bx bx-menu sidebarBtn'></i>
+            <span class="dashboard">Dashboard</span>
+        </div>
+
+        <div class="profile-details">
+            <img src="{{ user_profile.profile_picture.url }}" alt="">
+            <span class="admin_name">{{user.username}}</span>
+            <i class='bx bx-chevron-down'></i>
+        </div>
+    </nav>
+
+    <div class="home-content">
+
+        <div class="container" style="min-height: 100vh;">
+            <h1 style="font-size: xx-large; color:black;">Available courses</h1>
+
+            <div class="cart" >
+
+                {% for course in courses %}
+
+                <div class="card mb-4" style="width:19em;" sty>
+
+                    <div class="row g-0">
+
+                        <div>
+                            <img src="{{ course.img.url }}" class="img-fluid rounded-start" alt="..." width="100%">
+                        </div>
+                        <div class="col-md-15">
+                            <div class="card-body">
+                                <p class="card-title"><a href="{% url 'course_details' course.uu_id %}"> {{ course.title}}</a> </p>
+                                <p class="card-text">{{ course.description}}</p>
+                                <p class="card-text"><small class="text-muted">&#8358 {{ course.price|intcomma}}</small></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+        <div class="container" id="enrolled_course" style="min-height: 100vh; padding-top:10rem;">
+            <h1 style="font-size: xx-large; color:black;">Your Enrolled Courses</h1>
+            <p>{{course_count}} courses enrolled</p>
+
+            <ul class="list-group">
+                {% if enrolled_courses %}
+                {% for enrollment in enrolled_courses %}
+                <li class="list-group-item">
+                    <a href="{% url 'course_detail' course_id=enrollment.course.id %}">
+                        {{ enrollment.course.title }}
+                    </a>
+                    <p>Enrolled on: {{ enrollment.enrollment_date|date:"F d, Y" }}</p>
+                </li>
+                {% endfor %}
+                {% else %}
+                <li class="list-group-item">
+                    You haven't enrolled in any courses yet.
+                </li>
+                {% endif %}
+            </ul>
+
+
+
+        </div>
+        <!-- <section class="user-profile" id="user_profile"   style="padding: 30px;">
+
+            <div class="cardbox">
+                <div class="cardprofile">
+                    <div class="image-content">
+                        <span class="overlay"></span>
+                        <div class="card-image">
+                            <img src="{{ user_profile.profile_picture.url }}" alt="Profile Picture" class="card-img" >
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h2 class="name">{{ user.first_name }} {{ user.last_name }}</h2>
+                        <p class="description">{{ user.email }}</p>
+
+                        <p class="description">{{ user_profile.bio }}</p>
+                        <a href="{% url 'edit_profile'  user.id %}" class="button">Edit Profile</a>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+        <div style="padding: 40px;" id="user_profile">
+            <div class="px-4 sm:px-0">
+              <h3 class="text-base font-semibold leading-7 text-gray-900">User Information</h3>
+              <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Personal details and application.</p>
+            </div>
+            <div class="mt-6 border-t border-gray-100">
+              <dl class="divide-y divide-gray-100">
+                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt class="text-sm font-medium leading-6 text-gray-900">Full name</dt>
+                  <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ user.first_name }} {{ user.last_name }}</dd>
+                </div>
+                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt class="text-sm font-medium leading-6 text-gray-900"> username</dt>
+                  <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ user.username }}</dd>
+                </div>
+                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt class="text-sm font-medium leading-6 text-gray-900">Email address</dt>
+                  <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ user.email }}</dd>
+                </div>
+                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt class="text-sm font-medium leading-6 text-gray-900">Attachments</dt>
+                  <dd class="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                    <ul role="list" class="divide-y divide-gray-100 rounded-md border border-gray-200">
+                      <li class="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
+                        <div class="flex w-0 flex-1 items-center">
+                          <svg class="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M15.621 4.379a3 3 0 00-4.242 0l-7 7a3 3 0 004.241 4.243h.001l.497-.5a.75.75 0 011.064 1.057l-.498.501-.002.002a4.5 4.5 0 01-6.364-6.364l7-7a4.5 4.5 0 016.368 6.36l-3.455 3.553A2.625 2.625 0 119.52 9.52l3.45-3.451a.75.75 0 111.061 1.06l-3.45 3.451a1.125 1.125 0 001.587 1.595l3.454-3.553a3 3 0 000-4.242z" clip-rule="evenodd" />
+                          </svg>
+                          <p>{{ user_profile.bio }}</p>
+                         
+                        </div>
+                        
+                       
+                      </li>
+                    </ul>
+                  </dd>
+                </div>
+                <!-- <a href="{% url 'edit_profile'  user.id %}" class="button" style="background :#0d3073;">Edit Profile</a> -->
+
+              </dl>
+            </div>
+          </div>
+          
+    </div>
+    
+</section>
+
+{% endblock %}

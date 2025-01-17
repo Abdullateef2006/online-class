@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load custom_filters %}
+
+{% block content %}
+<style>
+  h1, h2, h3, h4, h5, h6, p, li {
+    color: white;
+  }
+</style>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <h1>{{ course.title }}</h1>
+      <h3><strong>Category: </strong>{{ course.category.name }}</h3>
+
+      <hr class="my-4">
+
+      <!-- Course Description -->
+      <h2>Description</h2>
+      <p>{{ course.description }}</p>
+
+      <hr class="my-4">
+
+      <!-- Course Lessons -->
+      <h2>Lessons</h2>
+      <div id="lessonsAccordion">
+        {% for lesson in free_lessons %}
+        <div class="card">
+          <div class="card-header" id="lesson{{ lesson.id }}">
+            <h5 class="mb-0"  style="color: black;">
+              <button class="btn btn-light" data-toggle="collapse" data-target="#lessonCollapse{{ lesson.id }}"
+                aria-expanded="true" aria-controls="lessonCollapse{{ lesson.id }}" style="color: blue;">
+                {{ lesson.title }}
+              </button>
+            </h5>
+          </div>
+          <div id="lessonCollapse{{ lesson.id }}" class="collapse" aria-labelledby="lesson{{ lesson.id }}"
+            data-parent="#lessonsAccordion">
+            <div class="card-body">
+              <p  style="color: black;">{{ lesson.description }}</p>
+              <ul>
+                {% for topic in lesson.topic_set.all %}
+                <li  style="color: black;">{{ topic.title }}</li>
+                {% if topic.video_file %}
+                <video src="{{ topic.video_file.url }}" width="70%" controls></video>
+                <p><a href="{{ topic.video_file.url }}" target="_blank">Watch the video</a></p>
+                {% endif %}
+                {% if topic.pdf_file %}
+                <p><a href="{{ topic.pdf_file.url }}" target="_blank">Download PDF</a></p>
+                {% else %}
+                <li><a href="">No pdf available for this lesson</a></li>
+                {% endif %}
+                {% endfor %}
+              </ul>
+              <!-- You can add video and PDF content for the lesson here -->
+            </div>
+          </div>
+        </div>
+        {% empty %}
+        <p>No lessons available.</p>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="col-md-4" style="margin-top: 100px;">
+      <div class="card">
+        <div class="card-body">
+          <p class="card-title"  style="color: black;">Do you want to go further in learning {{course.title}}</p>
+          <p><a href="{% url 'course_details_further' course.uu_id   %}" class="btn btn-primary">Click here</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

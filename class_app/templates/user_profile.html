@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+\''
+{% block content %}
+<h1>User profile</h1>
+<section class="user-profile"  style="padding: 17px;">
+
+
+
+    <div class="row my-3 mb-5">
+        <div class="col-md-2">
+          
+        </div>
+        <div class="col-md-8 mb-5">
+            <div class="card">
+                <h5 class="card-header text-center">
+                    Edit Profile
+                </h5>
+                <div class="card-body">
+                    <form action="." method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+    
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+{% endblock %}

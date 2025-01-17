@@ -1,0 +1,56 @@
+<!-- messagingbot/templates/user_chat.html -->
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2>Chat with Admin</h2>
+
+  <!-- Chat display -->
+  <div class="card">
+    <div class="card-header">
+      Chat with <span id="selectedUsername">{{ selected_user.username }}</span>
+    </div>
+    <div class="card-body messages">
+      {% for message in messages_between_admin_and_user %}
+        <p><strong>{{ message.sender.username }}:</strong> {{ message.content }}</p>
+      {% endfor %}
+    </div>
+    <div class="card-footer">
+      <form id="messageForm" method="post">
+        {% csrf_token %}
+        <div class="input-group">
+          <input type="text" id="messageInput" name="content" class="form-control" placeholder="Type your message..." required>
+          <div class="input-group-append">
+            <button type="submit" class="btn btn-primary">Send</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function () {
+    // AJAX to send a message
+    $("#messageForm").on("submit", function (e) {
+      e.preventDefault();
+      var formData = $(this).serialize();
+      $.ajax({
+        url: "{% url 'user_chat' selected_user.id %}",  // Use the correct URL tag for user_chat
+        method: "POST",
+        data: formData,
+        success: function (data) {
+          // Clear the message input
+          $("#messageInput").val("");
+          // Append the sent message to the chat
+          $(".messages").append('<p><strong>You:</strong> ' + data.content + '</p>');
+        },
+        error: function () {
+          alert('Error sending message.');
+        }
+      });
+    });
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Initiate Payment</title>
+</head>
+<body>
+    <h1>Payment for {{ course.title }}</h1>
+    
+    <form method="POST" action="https://checkout.paystack.com/">
+        
+        {% csrf_token %}
+        <input type="hidden" name="key" value="sk_test_2de22e65cd85be13d98741474297a8e5bf84dcf5">
+        <input type="hidden" name="email" value="{{ user.email }}">
+        <input type="hidden" name="amount" value="10000">
+        <input type="hidden" name="currency" value="NGN">
+        <input type="hidden" name="metadata" value='{"course_id": "{{ course.id }}"}'>
+        <input type="hidden" name="reference" value="{{ reference }}">
+        
+        <button type="submit">Pay Now</button>
+    </form>
+</body>
+</html>

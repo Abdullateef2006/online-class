@@ -1,0 +1,212 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- About Us Section -->
+<section id="about-us" class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <h1 class="display-4">About Us</h1>
+                <p class="lead">Welcome to our online class! We are dedicated to providing high-quality education to our
+                    students. Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic dolorum, quos, in explicabo soluta id cum suscipit nostrum esse 
+                    ut ullam perferendis voluptatem autem beatae nemo sint tenetur sequi assumenda!</p>
+            </div>
+            <div class="col-lg-6">
+                <img src="{% static './images/aout.jpg' %}" alt="About Us Image" class="img-fluid rounded shadow">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Our Courses Section -->
+<section id="our-courses" class="py-5">
+    <div class="container">
+        <h2 class="text-center">Our Courses</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card mb-4 shadow">
+                    <img src="{% static 'images/javascript.jpeg' %}" alt="Course 1" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Course 1</h5>
+                        <p class="card-text">Explore the world of Course 1.</p>
+                        <p>                        <a href="#" class="btn btn-primary">Learn More</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow">
+                    <img src="{% static 'images/django.webp' %}" alt="Course 1" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Course 1</h5>
+                        <p class="card-text">Explore the world of Course 1.</p>
+                        <p> <a href="#" class="btn btn-primary">Learn More</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow">
+                    <img src="{% static 'images/py.jpeg' %}" alt="Course 1" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Course 1</h5>
+                        <p class="card-text">Explore the world of Course 1.</p>
+                        <p>                        <a href="#" class="btn btn-primary">Learn More</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <!-- Add more course cards here -->
+            </div>
+            <div class="col-md-4">
+                <!-- Add more course cards here -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Our Services Section -->
+<section id="our-services" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center">Our Services</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card mb-4 shadow">
+                    <img src="{% static 'images/services.jpg' %}" alt="Service 1" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Service 1</h5>
+                        <p class="card-text">Discover our exceptional Service 1.</p>
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow">
+                    <img src="{% static 'images/service1.jpg' %}" alt="Service 1" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Service 1</h5>
+                        <p class="card-text">Discover our exceptional Service 1.</p>
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>   <div class="col-md-4">
+                <div class="card mb-4 shadow">
+                    <img src="{% static 'images/service2.jpg' %}" alt="Service 1" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Service 1</h5>
+                        <p class="card-text">Discover our exceptional Service 1.</p>
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Mission and Vision Section -->
+<section id="mission-vision" class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <h2 class="text-center mb-4">Our Mission</h2>
+                <p>We are on a mission to provide accessible and quality education to learners around the world.</p>
+            </div>
+            <div class="col-lg-6">
+                <h2 class="text-center mb-4">Our Vision</h2>
+                <p>Our vision is to empower individuals through knowledge and skill development, making a positive
+                    impact on their lives.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <h2 class="text-center mb-4">Contact Us</h2>
+                <ul class="list-unstyled">
+                    <li><strong>Email:</strong> info@example.com</li>
+                    <li><strong>Phone:</strong> +1 (123) 456-7890</li>
+                    <li><strong>WhatsApp:</strong> +1 (987) 654-3210</li>
+                    <li><strong>Account:</strong> @exampleaccount</li>
+                </ul>
+            </div>
+            <div class="col-lg-6">
+                <h2 class="text-center mb-4">Follow Us</h2>
+                <ul class="list-inline social-icons">
+                    <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                    <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                    <li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<style>
+    /* Custom CSS for styling */
+    #about-us {
+        padding-top: 60px;
+    }
+
+    #about-us h1 {
+        font-size: 2.5rem;
+        color: #2ecc71; /* Green */
+    }
+
+    #about-us p {
+        font-size: 1.2rem;
+        color: #333;
+    }
+
+    #mission-vision {
+        background-color: #f8f9fa;
+    }
+
+    #mission-vision h2 {
+        font-size: 2rem;
+        color: #e74c3c; /* Red */
+    }
+
+    #mission-vision p {
+        font-size: 1.1rem;
+        color: #666;
+    }
+
+    #contact {
+        padding-top: 40px;
+    }
+
+    #contact h2 {
+        font-size: 2rem;
+        color: #3498db; /* Blue */
+    }
+
+    #contact ul {
+        list-style-type: none;
+        font-size: 1.1rem;
+        color: #555;
+    }
+
+    #contact strong {
+        color: #333;
+    }
+
+    #follow-us {
+        background-color: #f8f9fa;
+    }
+
+    .social-icons .list-inline-item a {
+        font-size: 2rem;
+        margin: 0 10px;
+        color: #9b59b6; /* Purple */
+    }
+
+    .social-icons .list-inline-item a:hover {
+        color: #8e44ad; /* Dark Purple */
+    }
+</style>
+{% endblock %}
